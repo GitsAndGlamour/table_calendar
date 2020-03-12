@@ -6,6 +6,9 @@ part of table_calendar;
 /// Callback exposing currently selected day.
 typedef void OnDaySelected(DateTime day, List events);
 
+/// Callback exposing currently selected day.
+typedef void OnChevronClicked();
+
 /// Callback exposing currently visible days (first and last of them), as well as current `CalendarFormat`.
 typedef void OnVisibleDaysChanged(DateTime first, DateTime last, CalendarFormat format);
 
@@ -62,6 +65,9 @@ class TableCalendar extends StatefulWidget {
 
   /// Called whenever any day gets tapped.
   final OnDaySelected onDaySelected;
+
+  /// Called whenever a left or right arrow is pressed
+  final OnChevronClicked onChevronClicked;
 
   /// Called whenever any day gets long pressed.
   final OnDaySelected onDayLongPressed;
@@ -169,6 +175,7 @@ class TableCalendar extends StatefulWidget {
     this.onHeaderLongPressed,
     this.onVisibleDaysChanged,
     this.initialSelectedDay,
+    this.onChevronClicked,
     this.startDay,
     this.endDay,
     this.weekendDays = const [DateTime.saturday, DateTime.sunday],
@@ -222,6 +229,7 @@ class _TableCalendarState extends State<TableCalendar> with SingleTickerProvider
       selectedDayCallback: _selectedDayCallback,
       onVisibleDaysChanged: widget.onVisibleDaysChanged,
       includeInvisibleDays: widget.calendarStyle.outsideDaysVisible,
+      onChevronClicked: widget.onChevronClicked
     );
   }
 
@@ -245,12 +253,14 @@ class _TableCalendarState extends State<TableCalendar> with SingleTickerProvider
   }
 
   void _selectPrevious() {
+    widget.onChevronClicked();
     setState(() {
       widget.calendarController._selectPrevious();
     });
   }
 
   void _selectNext() {
+    widget.onChevronClicked();
     setState(() {
       widget.calendarController._selectNext();
     });
