@@ -103,6 +103,7 @@ class CalendarController {
     @required StartingDayOfWeek startingDayOfWeek,
     @required _SelectedDayCallback selectedDayCallback,
     @required OnVisibleDaysChanged onVisibleDaysChanged,
+    @required OnChevronClicked onChevronClicked,
     @required bool includeInvisibleDays,
   }) {
     _events = events;
