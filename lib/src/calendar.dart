@@ -253,17 +253,18 @@ class _TableCalendarState extends State<TableCalendar> with SingleTickerProvider
   }
 
   void _selectPrevious() {
-    widget.onChevronClicked();
+    
     setState(() {
       widget.calendarController._selectPrevious();
     });
+    widget.onChevronClicked('previous');
   }
 
   void _selectNext() {
-    widget.onChevronClicked();
     setState(() {
       widget.calendarController._selectNext();
     });
+    widget.onChevronClicked('next');
   }
 
   void _selectDay(DateTime day) {
